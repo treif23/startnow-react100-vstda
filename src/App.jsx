@@ -4,16 +4,7 @@ import TodosList from './todos-list';
 
 
 const todos = [
-  // {
-  //   task: '',
-  //   isCompleted: '',
-  // },
-  // {
-  //   task: 'eat dinner',
-  //   isCompleted: true
-  // }
 ];
-
 
 
 class App extends Component {
@@ -21,46 +12,58 @@ class App extends Component {
     super(props);
 
     this.state = {
+      id: null,
       todos: todos,
+      //isEditing : false,
+     // priority: null,
     };
   }
 
   render() {
     return (
       <div className='container'>
-      <div className="row">
-        <div className='col-4'>
-          <CreateTodo todos={this.state.todos} createTask={this.createTask.bind(this)} />
+
+        <div className='tagline'>
+          <h3 id='title' className='tagline'>Very Simple To Do App</h3>
+          <h5 id='h5'>Track all of the things</h5>
         </div>
-        
-        
-        
-        <div className='col-8'>
-        <div id='todos'>
-          View Todos
+        <hr />
+
+        <div className="row">
+          <div className='col-4'>
+            <CreateTodo todos={this.state.todos} createTask={this.createTask.bind(this)} />
           </div>
-          <TodosList
-            todos={this.state.todos}
-            toggleTask={this.toggleTask.bind(this)}
-            saveTask={this.saveTask.bind(this)}
-            deleteTask={this.deleteTask.bind(this)}
-          />
-         </div>
+
+
+
+          <div className='col-8'>
+            <div id='todos'>
+              View Todos
+          </div>
+            <TodosList
+              todos={this.state.todos}
+              // toggleTask={this.toggleTask.bind(this)}
+              saveTask={this.saveTask.bind(this)}
+              deleteTask={this.deleteTask.bind(this)}
+              priority = {this.state.priority}
+            />
+          </div>
         </div>
-     </div>
+      </div>
     );
   }
 
-  toggleTask(task) {
-    const foundTodo = _.find(this.state.todos, todo => todo.task === task);
-    foundTodo.isCompleted = !foundTodo.isCompleted;
-    this.setState({ todos: this.state.todos });
-  }
+  // toggleTask(task) {
+  //   const foundTodo = _.find(this.state.todos, todo => todo.task === task);
+  //   foundTodo.isCompleted = !foundTodo.isCompleted;
+  //   this.setState({ todos: this.state.todos });
+  // }
 
   createTask(task) {
     this.state.todos.push({
       task: task,
-      isCompleted: false
+      isCompleted: false,
+
     });
     this.setState({ todos: this.state.todos });
   }
